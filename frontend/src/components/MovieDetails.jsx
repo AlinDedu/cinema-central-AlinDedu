@@ -1,6 +1,7 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import "./MovieDetails.css";
+import "./styles/MovieDetails.css";
+import NavBar from "./NavBar.jsx";
 
 const MovieDetails = () => {
     const {id} = useParams();
@@ -32,15 +33,17 @@ const MovieDetails = () => {
 
 
     return (
-        movie&&<div className="movie-details" style={backgroundStyle}>
-            <h1 className="original-title">{movie.title}</h1>
-            <p>Language: {movie.original_language}</p>
-            <p>Genres: {getGenres()}</p>
-            <p>Description: {movie.overview}</p>
-            <p>Release Date: {movie.release_date}</p>
-            <p>Vote Count: {movie.vote_count}</p>
-            <p>Vote Average: {movie.vote_average}</p>
-        </div>
+        movie&&
+            <div className="movie-details" style={backgroundStyle}>
+                <NavBar />
+                <h1 className="original-title">{movie.title}</h1>
+                <p>Language: {movie.original_language}</p>
+                <p>Genres: {getGenres()}</p>
+                <p>Description: {movie.overview}</p>
+                <p>Release Date: {movie.release_date}</p>
+                <p>Vote Count: {movie.vote_count}</p>
+                <p>Vote Average: {movie.vote_average}</p>
+            </div>
     )
 
 }

@@ -1,7 +1,9 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Home from "./pages/Home.jsx";
-import Movies from "./pages/Movies.jsx";
-import MovieDetails from "./pages/MovieDetails.jsx";
+import Home from "./components/Home.jsx";
+import Movies from "./components/Movies.jsx";
+import MovieDetails from "./components/MovieDetails.jsx";
+import Register from "./components/Register.jsx";
+import Login from "./components/Login.jsx";
 
 
 const App = () => {
@@ -13,6 +15,8 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/movies" element={<Movies />} />
                     <Route path="/movies/:id" element={<MovieDetails />}/>
+                    <Route path="/register" element={<Register />}/>
+                    <Route path="/login" element={<Login />}/>
                 </Routes>
             </div>
         </Router>

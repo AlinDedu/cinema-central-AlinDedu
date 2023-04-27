@@ -2,11 +2,10 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  background-color: RGB(51, 45, 45);
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -67,63 +66,43 @@ button:focus-visible {
   }
 }
 
-.movies-grid {
-  background-color: transparent;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  row-gap: 50px;
-  margin-left: 50px;
-}
-
-.movie-item {
-  margin: 0;
-  padding: 0;
-  border-color: #535bf2;
-  border-radius: 25px;
-  box-shadow: 0 10px 10px rgba(0, 125, 102, 0.2);
-}
 
 .title {
   text-align: center;
 }
 
-.main-container {
-  background-color: transparent;
+/*.movies-grid {*/
+/*  display: grid;*/
+/*  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));*/
+/*  gap: 20px;*/
+/*  margin-top: 40px;*/
+/*}*/
+
+.movie-item {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100vh;
-}
-
-.main-container.title {
-  font-size: 72px;
-  font-weight: bold;
-  margin-bottom: 16px;
-  color: #0071eb;
-  text-align: center;
-}
-
-.main-container.subtitle {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 32px;
-  color: #dacece;
-  text-align: center;
-}
-
-.main-container.start {
-  background-color: #0071eb;
-  color: #fff;
+  padding: 20px;
   border: none;
-  border-radius: 8px;
-  font-size: 24px;
-  font-weight: bold;
-  padding: 16px 32px;
-  cursor: pointer;
+  border-radius: 10px;
+  /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+  transition: box-shadow 0.4s ease-in-out;
 }
 
-.main-container.start:hover {
-  background-color: #0054a4;
+.movie-item:hover {
+  background: rgba(0, 125, 102, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
+
+.movie-poster {
+  width: 100%;
+  height: 50%;
+  padding-top: 150%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.movies-container {
+  margin-top: 25px;
+}
+
