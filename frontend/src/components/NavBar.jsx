@@ -31,17 +31,17 @@ const NavBar = () => {
                             <a className="nav-link" href="/">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/frontend/src/components/Movies">Movies</a>
+                            <a className="nav-link" href="/movies">Movies</a>
                         </li>
                     </ul>
 
                     <div className="d-flex align-items-center">
-                        <a href="/frontend/src/components/Login">
+                        <a href="/login">
                             <button type="button" className="btn btn-link px-3 me-2">
                                 Login
                             </button>
                         </a>
-                        <a href="/frontend/src/components/Register">
+                        <a href="/register">
                             <button type="button" className="btn btn-primary me-3">
                                 Sign up for free
                             </button>

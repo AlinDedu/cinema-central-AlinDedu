@@ -33,3 +33,11 @@
     height: auto;
     border-radius: 0.25rem;
 }
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+

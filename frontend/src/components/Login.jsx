@@ -26,30 +26,34 @@ const Login = () => {
     };
 
     return (
-        <MDBContainer>
+        <MDBContainer fluid className="bg-dark-gradient py-5">
             <MDBRow>
-                <MDBCol md="6">
-                    <form onSubmit={handleSubmit}>
-                        <p className="h4 text-center mb-4">Log In</p>
-                        <div className="grey-text">
-                            <MDBInput
-                                label="Your email"
-                                name="email"
-                                onChange={handleChange}
-                                value={user.email}
-                            />
-                            <MDBInput
-                                label="Your password"
-                                type="password"
-                                name="password"
-                                onChange={handleChange}
-                                value={user.password}
-                            />
+                <MDBCol md="6" className="mx-auto">
+                    <div className="card">
+                        <div className="card-body">
+                            <form onSubmit={handleSubmit}>
+                                <p className="h4 text-center mb-4">Log In</p>
+                                <div className="grey-text">
+                                    <MDBInput
+                                        label="Your email"
+                                        name="email"
+                                        onChange={handleChange}
+                                        value={user.email}
+                                    />
+                                    <MDBInput
+                                        label="Your password"
+                                        type="password"
+                                        name="password"
+                                        onChange={handleChange}
+                                        value={user.password}
+                                    />
+                                </div>
+                                <div className="text-center">
+                                    <MDBBtn type="submit" color="primary">Log In</MDBBtn>
+                                </div>
+                            </form>
                         </div>
-                        <div className="text-center">
-                            <MDBBtn type="submit">Log In</MDBBtn>
-                        </div>
-                    </form>
+                    </div>
                 </MDBCol>
             </MDBRow>
         </MDBContainer>
