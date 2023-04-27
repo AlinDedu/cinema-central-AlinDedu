@@ -12,19 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/movies")
+@CrossOrigin("localhost:8080")
 public class MoviesController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping("/movies/{page}")
-    public ResponseEntity<List<MovieDto>> getAllMovies(@PathVariable int page) {
-        String url = "https://api.themoviedb.org/3/movie/popular?api_key=b11b1adf41fea93b12a7421bf293f00e&page=" + page;
-
-        TmdbApiResponse response = restTemplate.getForObject(url, TmdbApiResponse.class);
-
-        List<MovieDto> movies = new ArrayList<>(response.getResults());
-
-        return ResponseEntity.ok(movies);
-    }
 }
