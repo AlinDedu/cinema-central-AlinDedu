@@ -1,40 +1,39 @@
-.home-container {
+.landing-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f7f7f7;
-    background: url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+    background: #f7f7f7 url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
 }
 
-.title {
+.landing-title {
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 2rem;
     color: aliceblue; /* add color */
 }
 
-.subtitle {
+.landing-subtitle {
     font-size: 2rem;
     font-weight: 400;
     margin-bottom: 2rem;
     color: beige; /* add color */
 }
 
-.description {
+.landing-description {
     font-size: 1.2rem;
     font-weight: 300;
     margin-bottom: 2rem;
     color: beige; /* add color */
 }
 
-.img-fluid {
+.landing-img-fluid {
     width: 100%;
     height: auto;
     border-radius: 0.25rem;
 }
 
-.button-container {
+.landing-button-container {
     display: flex;
     justify-content: center;
     align-items: flex-start;

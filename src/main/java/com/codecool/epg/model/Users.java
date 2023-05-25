@@ -25,6 +25,17 @@ public class Users {
     @Column(nullable = false, columnDefinition = "varchar(255) default ''")
     private String password;
 
+    private String roles;
+
+    public Users() {};
+
+    public Users(String username, String email, String password, String roles) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
     public Long getId() {
         return id;
     }
@@ -55,5 +66,24 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles='" + roles + '\'' +
+                '}';
     }
 }
