@@ -3,7 +3,6 @@ import Sidebar from "../components/Sidebar.jsx";
 import Overlay from "../components/Overlay.jsx";
 import SearchModal from "../components/SearchModal.jsx";
 import React, {useEffect, useState} from "react";
-import MovieLanguageGridList from "../components/MovieLanguageGridList.jsx";
 import {api_key, fetchDataFromServer} from "../assets/js/api.js";
 import MovieCategoryGridList from "../components/MovieCategoryGridList.jsx";
 

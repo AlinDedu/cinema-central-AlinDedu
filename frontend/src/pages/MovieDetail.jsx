@@ -52,7 +52,7 @@ const MovieDetail = ({toggleSidebar, isSidebarOpen, handleSearchInputChange, han
         return videoList.filter(({ type, site}) => (type === "Trailer" || type === "Teaser") && site === "YouTube");
     }
 
-    document.title = movie.title;
+    document.title = `${movie.title} - Cinema Central`;
 
     return (
         <main>

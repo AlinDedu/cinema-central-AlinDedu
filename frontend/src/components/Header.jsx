@@ -12,9 +12,10 @@ const Header = ({toggleSidebar, isSidebarOpen, handleSearchInputChange, searchin
         <header className="header">
             <a href="/movies" className="logo">
                 <img
-                    src="/logo.svg"
-                    width={140}
-                    height={32}
+                    src="/logo.png"
+                    width={300}
+                    height={30}
+                    style={{marginLeft: "24px"}}
                     alt="Cinema Central Home"
                 />
             </a>

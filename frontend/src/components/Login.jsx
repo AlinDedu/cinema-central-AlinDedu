@@ -3,26 +3,30 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
 import axios from "axios";
 
 const Login = () => {
-    const [user, setUser] = useState({
-        email: "",
-        password: "",
-    });
+    // const [user, setUser] = useState({
+    //     email: "",
+    //     password: "",
+    // });
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     const [showPasswordResetForm, setShowPasswordResetForm] = useState(false);
     const [resetToken, setResetToken] = useState("");
     const [newPassword, setNewPassword] = useState("");
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUser((prevState) => ({ ...prevState, [name]: value }));
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post("http://localhost:8080/users/login", user)
+            .post("http://localhost:8080/users/login", {}, {
+                auth:{
+                    username: username,
+                    password: password
+                }
+            })
             .then((response) => {
                 console.log(response.data);
-                alert("Welcome " + response.data.username);
+                localStorage.setItem("userTkn", response.data)
+                response.data&&alert("Welcome " + username);
                 // Redirect or perform additional actions after successful login
             })
             .catch((error) => {
@@ -112,17 +116,17 @@ const Login = () => {
                                     <p className="h4 text-center mb-4">Log In</p>
                                     <div className="grey-text">
                                         <MDBInput
-                                            label="Your email"
-                                            name="email"
-                                            onChange={handleChange}
-                                            value={user.email}
+                                            label="Your username"
+                                            name="username"
+                                            onChange={(e) => setUsername(e.target.value)}
+                                            value={username}
                                         />
                                         <MDBInput
                                             label="Your password"
                                             type="password"
                                             name="password"
-                                            onChange={handleChange}
-                                            value={user.password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            value={password}
                                         />
                                     </div>
                                     <div className="text-center">

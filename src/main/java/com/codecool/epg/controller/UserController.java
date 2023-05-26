@@ -2,6 +2,7 @@ package com.codecool.epg.controller;
 
 import com.codecool.epg.model.Users;
 import com.codecool.epg.repository.UserRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -94,7 +95,6 @@ public class UserController {
 //         }
 //         return resetTokenExpiry.before(new Date());
 //     }
-  
     @GetMapping
     public Iterable<Users> getAllUsers() {
         return userRepository.findAll();
