@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import MovieCard from './MovieCard.jsx';
 import { fetchDataFromServer, api_key } from '../assets/js/api.js';
 
-const MovieCategoryGridList = ({ movieList, title, currentPage, setCurrentPage, categoryId }) => {
+const MovieCategoryGridList = ({
+   movieList,
+   title,
+   currentPage,
+   setCurrentPage,
+   categoryId
+}) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleLoadMore = () => {

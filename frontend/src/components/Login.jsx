@@ -3,10 +3,6 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from "mdbreact";
 import axios from "axios";
 
 const Login = () => {
-    // const [user, setUser] = useState({
-    //     email: "",
-    //     password: "",
-    // });
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 

@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { api_key, fetchDataFromServer } from "../assets/js/api.js";
 import MovieCard from './MovieCard';
 
-const SearchModal = ({ searchQuery, handleSearchModalClose, setSearching }) => {
+const SearchModal = ({
+     searchQuery,
+     handleSearchModalClose,
+     setSearching
+}) => {
     const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {

@@ -1,7 +1,12 @@
 import React from 'react';
 import {imageBaseURL} from "../assets/js/api.js";
 
-const HeroSliderControlItem = ({index, movie, active, toggleSlide}) => {
+const HeroSliderControlItem = ({
+   index,
+   movie,
+   active,
+   toggleSlide
+}) => {
     const {
         poster_path,
         title

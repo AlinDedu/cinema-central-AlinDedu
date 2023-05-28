@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
 
-const Header = ({toggleSidebar, isSidebarOpen, handleSearchInputChange, searching}) => {
+const Header = ({
+    toggleSidebar,
+    isSidebarOpen,
+    handleSearchInputChange,
+    searching
+}) => {
 
     const [searchOpen, setSearchOpen] = useState(false);
 

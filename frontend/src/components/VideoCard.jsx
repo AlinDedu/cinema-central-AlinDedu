@@ -1,6 +1,9 @@
 import React from 'react';
 
-const VideoCard = ({name, videoKey}) => {
+const VideoCard = ({
+   name,
+   videoKey
+}) => {
     return (
         <div className="video-card">
             <iframe

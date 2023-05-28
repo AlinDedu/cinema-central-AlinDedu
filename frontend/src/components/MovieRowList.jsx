@@ -1,7 +1,10 @@
 import React from 'react';
 import MovieCard from "./MovieCard.jsx";
 
-const MovieRowList = ({movieList, title}) => {
+const MovieRowList = ({
+  movieList,
+  title
+}) => {
     return (
         <section className="movie-list" aria-label={title}>
             <div className="title-wrapper">

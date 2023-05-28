@@ -11,7 +11,6 @@ import LanguagePage from "./pages/LanguagePage.jsx";
 function App() {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    const [showSearchModal, setShowSearchModal] = useState(false);
     const [searching, setSearching] = useState(false);
 
     const toggleSidebar = () => {
@@ -23,13 +22,8 @@ function App() {
        console.log(e.target.value)
    }
 
-   const handleSearch = () => {
-       setShowSearchModal(searchQuery.length > 0);
-   }
-
    const handleSearchModalClose = () => {
        setSearchQuery('');
-       setShowSearchModal(false);
    }
 
     return (
@@ -43,7 +37,6 @@ function App() {
                             toggleSidebar={toggleSidebar}
                             isSidebarOpen={isSidebarOpen}
                             handleSearchInputChange={handleSearchInputChange}
-                            handleSearch={handleSearch}
                             searchQuery={searchQuery}
                             handleSearchModalClose={handleSearchModalClose}
                             searching={searching}
@@ -58,7 +51,6 @@ function App() {
                             toggleSidebar={toggleSidebar}
                             isSidebarOpen={isSidebarOpen}
                             handleSearchInputChange={handleSearchInputChange}
-                            handleSearch={handleSearch}
                             searchQuery={searchQuery}
                             handleSearchModalClose={handleSearchModalClose}
                             searching={searching}
@@ -73,7 +65,6 @@ function App() {
                             toggleSidebar={toggleSidebar}
                             isSidebarOpen={isSidebarOpen}
                             handleSearchInputChange={handleSearchInputChange}
-                            handleSearch={handleSearch}
                             searchQuery={searchQuery}
                             handleSearchModalClose={handleSearchModalClose}
                             searching={searching}
@@ -88,7 +79,6 @@ function App() {
                             toggleSidebar={toggleSidebar}
                             isSidebarOpen={isSidebarOpen}
                             handleSearchInputChange={handleSearchInputChange}
-                            handleSearch={handleSearch}
                             searchQuery={searchQuery}
                             handleSearchModalClose={handleSearchModalClose}
                             searching={searching}

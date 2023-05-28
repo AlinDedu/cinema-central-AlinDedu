@@ -6,7 +6,15 @@ import React, {useEffect, useState} from "react";
 import {api_key, fetchDataFromServer} from "../assets/js/api.js";
 import MovieCategoryGridList from "../components/MovieCategoryGridList.jsx";
 
-const CategoryPage = ({searching, setSearching, toggleSidebar, isSidebarOpen, handleSearchInputChange, handleSearch, searchQuery, handleSearchModalClose}) => {
+const CategoryPage = ({
+      searching,
+      setSearching,
+      toggleSidebar,
+      isSidebarOpen,
+      handleSearchInputChange,
+      searchQuery,
+      handleSearchModalClose
+}) => {
     const [movies, setMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -29,8 +37,6 @@ const CategoryPage = ({searching, setSearching, toggleSidebar, isSidebarOpen, ha
                 toggleSidebar={toggleSidebar}
                 isSidebarOpen={isSidebarOpen}
                 handleSearchInputChange={handleSearchInputChange}
-                handleSearch={handleSearch}
-                handleSearchModalClose={handleSearchModalClose}
                 searching={searching}
             />
             <Sidebar isSidebarOpen={isSidebarOpen}/>

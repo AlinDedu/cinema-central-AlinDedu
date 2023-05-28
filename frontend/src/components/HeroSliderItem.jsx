@@ -1,7 +1,11 @@
 import React from 'react';
 import {imageBaseURL} from "../assets/js/api.js";
 
-const HeroSliderItem = ({index, movie, active}) => {
+const HeroSliderItem = ({
+    index,
+    movie,
+    active
+}) => {
 
     const genreList =  {
         asString(genreIdList) {

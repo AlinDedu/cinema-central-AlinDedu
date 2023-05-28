@@ -6,15 +6,21 @@ import SearchModal from "../components/SearchModal.jsx";
 import "../assets/css/style.css"
 import Header from "../components/Header.jsx";
 
-const MainPage = ({toggleSidebar, isSidebarOpen, handleSearchInputChange, handleSearch, searchQuery, handleSearchModalClose, searching, setSearching}) => {
+const MainPage = ({
+      toggleSidebar,
+      isSidebarOpen,
+      handleSearchInputChange,
+      searchQuery,
+      handleSearchModalClose,
+      searching,
+      setSearching
+}) => {
     return (
         <main>
             <Header
                 toggleSidebar={toggleSidebar}
                 isSidebarOpen={isSidebarOpen}
                 handleSearchInputChange={handleSearchInputChange}
-                handleSearch={handleSearch}
-                handleSearchModalClose={handleSearchModalClose}
                 searching={searching}
             />
             <Sidebar isSidebarOpen={isSidebarOpen}/>

@@ -9,7 +9,15 @@ import "../assets/css/style.css"
 import Header from "../components/Header.jsx";
 import SearchModal from "../components/SearchModal.jsx";
 
-const MovieDetail = ({toggleSidebar, isSidebarOpen, handleSearchInputChange, handleSearch, searchQuery, handleSearchModalClose, searching, setSearching}) => {
+const MovieDetail = ({
+     toggleSidebar,
+     isSidebarOpen,
+     handleSearchInputChange,
+     searchQuery,
+     handleSearchModalClose,
+     searching,
+     setSearching
+}) => {
     const [movie, setMovie] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
     const { id } = useParams();
@@ -53,6 +61,7 @@ const MovieDetail = ({toggleSidebar, isSidebarOpen, handleSearchInputChange, han
     }
 
     document.title = `${movie.title} - Cinema Central`;
+    console.log(movie)
 
     return (
         <main>
@@ -60,8 +69,6 @@ const MovieDetail = ({toggleSidebar, isSidebarOpen, handleSearchInputChange, han
                 toggleSidebar={toggleSidebar}
                 isSidebarOpen={isSidebarOpen}
                 handleSearchInputChange={handleSearchInputChange}
-                handleSearch={handleSearch}
-                handleSearchModalClose={handleSearchModalClose}
                 searching={searching}
             />
             <Sidebar isSidebarOpen={isSidebarOpen}/>

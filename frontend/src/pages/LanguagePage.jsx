@@ -7,7 +7,15 @@ import Overlay from "../components/Overlay.jsx";
 import SearchModal from "../components/SearchModal.jsx";
 import MovieLanguageGridList from "../components/MovieLanguageGridList.jsx";
 
-const LanguagePage = ({handleSearchInputChange, handleSearch, searchQuery, handleSearchModalClose, searching, toggleSidebar, isSidebarOpen, setSearching}) => {
+const LanguagePage = ({
+      handleSearchInputChange,
+      searchQuery,
+      handleSearchModalClose,
+      searching,
+      toggleSidebar,
+      isSidebarOpen,
+      setSearching
+}) => {
     const [movies, setMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -30,8 +38,6 @@ const LanguagePage = ({handleSearchInputChange, handleSearch, searchQuery, handl
                 toggleSidebar={toggleSidebar}
                 isSidebarOpen={isSidebarOpen}
                 handleSearchInputChange={handleSearchInputChange}
-                handleSearch={handleSearch}
-                handleSearchModalClose={handleSearchModalClose}
                 searching={searching}
             />
             <Sidebar isSidebarOpen={isSidebarOpen}/>
