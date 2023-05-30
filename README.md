@@ -46,3 +46,7 @@ Follow these instructions to get the project up and running on your local machin
 5. Run backend application.
 
 6. Open your web browser and visit `http://127.0.0.1:5173/movies`
+
+### Aknowledgements
+
+The Cinema Central project was developed by Alin Dedu. It was inspired by the IMDB website. Special thanks to the team at [Codecool](https://codecool.com/ro/?utm_source=Google&utm_medium=CPC&utm_campaign=RO_Search_FS_NS&utm_content=Brand&gclid=Cj0KCQjwmtGjBhDhARIsAEqfDEfamMslN5iKjSQk3Uhijnekqeo5oxwjoqmUPO2CeBEVm_DLoLC1VE0aAkzaEALw_wcB) for their support and guidance during the development process.
