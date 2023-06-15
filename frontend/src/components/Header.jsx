@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
+import userContext from "../assets/js/UserContext.js";
+import UserContext from "../assets/js/UserContext.js";
 
 const Header = ({
     toggleSidebar,
@@ -8,6 +10,7 @@ const Header = ({
 }) => {
 
     const [searchOpen, setSearchOpen] = useState(false);
+    const user = useContext(UserContext);
 
     const handleSearchOpen = () => {
         setSearchOpen(!searchOpen)
@@ -72,6 +75,7 @@ const Header = ({
                     className={isSidebarOpen ? "close" : "menu"}
                 />
             </button>
+            <button className="menu-btn">{user ? user.username : "Guest"}</button>
         </header>
     );
 };

@@ -42,7 +42,7 @@ const LanguagePage = ({
             />
             <Sidebar isSidebarOpen={isSidebarOpen}/>
             <Overlay isSidebarOpen={isSidebarOpen}/>
-            <article className="container" page-content="">
+            <article className="container-movies" page-content="">
                 {
                     movies &&
                     <MovieLanguageGridList movieList={movies} title={`${language} Movies`} currentPage={currentPage} setCurrentPage={setCurrentPage} setMovieList={setMovies} languageCode={language_code}/>

@@ -37,7 +37,7 @@ const Container = () => {
 
 
     return (
-        <article className="container" page-content="">
+        <article className="container-movies" page-content="">
             <Banner />
             <MovieRowList movieList={upcoming} title={"Upcoming Movies"}/>
             <MovieRowList movieList={trending} title={"Weekly Trending Movies"}/>

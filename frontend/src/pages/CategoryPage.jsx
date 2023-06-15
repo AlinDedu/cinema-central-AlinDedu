@@ -41,7 +41,7 @@ const CategoryPage = ({
             />
             <Sidebar isSidebarOpen={isSidebarOpen}/>
             <Overlay isSidebarOpen={isSidebarOpen}/>
-            <article className="container" page-content="">
+            <article className="container-movies" page-content="">
                 {
                     movies &&
                     <MovieCategoryGridList movieList={movies} title={`${category} Movies`} currentPage={currentPage} setCurrentPage={setCurrentPage} setMovieList={setMovies} categoryId={categoryId}/>

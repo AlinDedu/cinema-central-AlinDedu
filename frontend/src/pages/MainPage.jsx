@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Sidebar from "../components/Sidebar.jsx";
 import Overlay from "../components/Overlay.jsx";
 import Container from "../components/Container.jsx";
 import SearchModal from "../components/SearchModal.jsx";
 import "../assets/css/style.css"
 import Header from "../components/Header.jsx";
+import axios from "axios";
 
 const MainPage = ({
       toggleSidebar,
@@ -13,8 +14,22 @@ const MainPage = ({
       searchQuery,
       handleSearchModalClose,
       searching,
-      setSearching
+      setSearching,
+    setUserDetails
 }) => {
+    const token = localStorage.getItem("accessToken");
+    useEffect(() => {
+        if (token != null) {
+            axios.get("http://localhost:8080/api/v1/user/details", {
+                    headers: {Authorization: `Bearer ${token}`}
+                }
+            )
+                .then((response) => {
+                    setUserDetails(response.data)
+                })
+        }
+    }, []);
+
     return (
         <main>
             <Header

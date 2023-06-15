@@ -74,7 +74,7 @@ const MovieDetail = ({
             <Sidebar isSidebarOpen={isSidebarOpen}/>
             <Overlay isSidebarOpen={isSidebarOpen}/>
             {movie &&
-                <article className="container" page-content="">
+                <article className="container-movies" page-content="">
                     <div className="movie-detail">
                         <div className="backdrop-image" style={{backgroundImage: `url(${imageBaseURL}${"w1280" || "original"}${movie.backdrop_path || movie.poster_path})`}}></div>
                         <figure className="poster-box movie-poster">
