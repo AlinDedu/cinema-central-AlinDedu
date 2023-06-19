@@ -1,6 +1,7 @@
 package com.codecool.epg.auth;
 
 import com.codecool.epg.config.JwtService;
+import com.codecool.epg.movie.Movie;
 import com.codecool.epg.user.Role;
 import com.codecool.epg.user.User;
 import com.codecool.epg.user.UserRepository;
@@ -45,5 +46,9 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    public boolean checkUsernameAvailability(String username) {
+        return !repository.existsByUsername(username);
     }
 }

@@ -1,22 +1,24 @@
-import React, {useState} from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import MainPage from './pages/MainPage.jsx';
 import MovieDetail from "./pages/MovieDetail.jsx";
 import Landing from "./pages/Landing.jsx";
 import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx"
 import CategoryPage from "./pages/CategoryPage.jsx";
 import LanguagePage from "./pages/LanguagePage.jsx";
 import removeTokenIfExpired from "./assets/js/token.js";
-import UserContext from "./assets/js/UserContext.js";
+import {AuthContextProvider} from "./assets/js/AuthContext.jsx";
+import ProfilePage from "./components/UserProfilePage.jsx";
 
 function App() {
     removeTokenIfExpired();
 
-    const [userDetails, setUserDetails] = useState(null);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [searching, setSearching] = useState(false);
+    const token = localStorage.getItem("accessToken");
 
     const toggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
@@ -31,73 +33,97 @@ function App() {
        setSearchQuery('');
    }
 
+    // useEffect(async () => {
+    //     if (token != null) {
+    //         await axios.get("http://localhost:8080/api/v1/user/details", {
+    //                 headers: {Authorization: `Bearer ${token}`}
+    //             }
+    //         )
+    //             .then((response) => {
+    //                 console.log(response.data)
+    //                 setUserDetails(response.data)
+    //             })
+    //     }
+    // }, []);
+
+
     return (
-        <UserContext.Provider value={userDetails}>
-            <Router>
+        <AuthContextProvider>
                 <Routes>
                     <Route path="/" element={<Landing/>}/>
                     <Route
-                        path="/movies"
-                        element={
-                            <MainPage
-                                toggleSidebar={toggleSidebar}
-                                isSidebarOpen={isSidebarOpen}
-                                handleSearchInputChange={handleSearchInputChange}
-                                searchQuery={searchQuery}
-                                handleSearchModalClose={handleSearchModalClose}
-                                searching={searching}
-                                setSearching={setSearching}
-                                setUserDetails={setUserDetails}
-                            />
-                        }
+                        path="/login"
+                        element={<Login/>}
                     />
                     <Route
-                        path="/movie/:id"
-                        element={
-                            <MovieDetail
-                                toggleSidebar={toggleSidebar}
-                                isSidebarOpen={isSidebarOpen}
-                                handleSearchInputChange={handleSearchInputChange}
-                                searchQuery={searchQuery}
-                                handleSearchModalClose={handleSearchModalClose}
-                                searching={searching}
-                                setSearching={setSearching}
-                            />
-                        }
+                        path="/register"
+                        element={<Register/>}
                     />
-                    <Route
-                        path="/movies/category/:category"
-                        element={
-                            <CategoryPage
-                                toggleSidebar={toggleSidebar}
-                                isSidebarOpen={isSidebarOpen}
-                                handleSearchInputChange={handleSearchInputChange}
-                                searchQuery={searchQuery}
-                                handleSearchModalClose={handleSearchModalClose}
-                                searching={searching}
-                                setSearching={setSearching}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/movies/language/:language"
-                        element={
-                            <LanguagePage
-                                toggleSidebar={toggleSidebar}
-                                isSidebarOpen={isSidebarOpen}
-                                handleSearchInputChange={handleSearchInputChange}
-                                searchQuery={searchQuery}
-                                handleSearchModalClose={handleSearchModalClose}
-                                searching={searching}
-                                setSearching={setSearching}
-                            />
-                        }
-                    />
-                    <Route path="/login" element={<Login setUserDetails={setUserDetails}/>}/>
-                    <Route path="/register" element={<Register setUserDetails={setUserDetails}/>}/>
+                    <Route element={<PrivateRoute />}>
+                        <Route
+                            path="/movies"
+                            element={
+                                <MainPage
+                                    toggleSidebar={toggleSidebar}
+                                    isSidebarOpen={isSidebarOpen}
+                                    handleSearchInputChange={handleSearchInputChange}
+                                    searchQuery={searchQuery}
+                                    handleSearchModalClose={handleSearchModalClose}
+                                    searching={searching}
+                                    setSearching={setSearching}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/movie/:id"
+                            element={
+                                <MovieDetail
+                                    toggleSidebar={toggleSidebar}
+                                    isSidebarOpen={isSidebarOpen}
+                                    handleSearchInputChange={handleSearchInputChange}
+                                    searchQuery={searchQuery}
+                                    handleSearchModalClose={handleSearchModalClose}
+                                    searching={searching}
+                                    setSearching={setSearching}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/movies/category/:category"
+                            element={
+                                <CategoryPage
+                                    toggleSidebar={toggleSidebar}
+                                    isSidebarOpen={isSidebarOpen}
+                                    handleSearchInputChange={handleSearchInputChange}
+                                    searchQuery={searchQuery}
+                                    handleSearchModalClose={handleSearchModalClose}
+                                    searching={searching}
+                                    setSearching={setSearching}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/movies/language/:language"
+                            element={
+                                <LanguagePage
+                                    toggleSidebar={toggleSidebar}
+                                    isSidebarOpen={isSidebarOpen}
+                                    handleSearchInputChange={handleSearchInputChange}
+                                    searchQuery={searchQuery}
+                                    handleSearchModalClose={handleSearchModalClose}
+                                    searching={searching}
+                                    setSearching={setSearching}
+                                />
+                            }
+                        />
+                        <Route
+                            path="user-profile/:username"
+                            element={<ProfilePage />}
+                        />
+                        <Route path="*" element={<Navigate to={"/movies"}/>}/>
+                    </Route>
                 </Routes>
-            </Router>
-        </UserContext.Provider>
+        </AuthContextProvider>
     );
 }
 

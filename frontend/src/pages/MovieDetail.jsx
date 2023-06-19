@@ -8,6 +8,7 @@ import VideoCard from "../components/VideoCard.jsx";
 import "../assets/css/style.css"
 import Header from "../components/Header.jsx";
 import SearchModal from "../components/SearchModal.jsx";
+import axios from "axios";
 
 const MovieDetail = ({
      toggleSidebar,
@@ -60,6 +61,33 @@ const MovieDetail = ({
         return videoList.filter(({ type, site}) => (type === "Trailer" || type === "Teaser") && site === "YouTube");
     }
 
+    const addToFavorites = () => {
+        const username = localStorage.getItem("user");
+        const movieName = movie.title;
+        const token = JSON.parse(localStorage.getItem("token")).token;
+
+        const headers = {
+            Authorization: `Bearer ${token}`
+        }
+        console.log(username)
+
+        axios
+            .post('http://localhost:8080/api/v1/user/favorite-movies', null, {
+                params: {
+                    username: username,
+                    movie: movieName
+                },
+                headers: headers
+            })
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+    }
+
     document.title = `${movie.title} - Cinema Central`;
     console.log(movie)
 
@@ -87,6 +115,12 @@ const MovieDetail = ({
                         <div className="detail-box">
                             <div className="detail-content">
                                 <h1 className="heading">{movie.title}</h1>
+                                <button
+                                    className="btn btn-outline-danger rounded-pill ml-auto mb-3"
+                                    onClick={addToFavorites}
+                                >
+                                    <i className="fas fa-heart mr-1"></i>Add To Favorite
+                                </button>
                                 <div className="meta-list">
                                     <div className="meta-item">
                                         <img

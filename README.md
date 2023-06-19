@@ -5,9 +5,9 @@ Cinema Central Application is a Spring Boot and React application that provides 
 ## Features
 
 - **Filters / Search:** Users are able to use a vast colletion of filters based on genre or official language. They can also search for any movie they like.
-
+![Alt Text](screenshot1.PNG)
 - **User registration:** Users can create an account by providing a unique username, email and password.
-
+![Alt Text](screenshot2.PNG)
 - **User authentication:** Registered users can log in using their credentials.
 
 - **Role-based authorization:** Users are assigned roles (e.g., ROLE_USER, ROLE_ADMIN) that determine their access right to different resources.

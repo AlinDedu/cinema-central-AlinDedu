@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
-import userContext from "../assets/js/UserContext.js";
-import UserContext from "../assets/js/UserContext.js";
+import {Link} from "react-router-dom";
+import {useAuthContext} from "../assets/js/AuthContext.jsx";
 
 const Header = ({
     toggleSidebar,
@@ -10,11 +10,12 @@ const Header = ({
 }) => {
 
     const [searchOpen, setSearchOpen] = useState(false);
-    const user = useContext(UserContext);
-
+    const {user} = useAuthContext();
+    const profileUrl = user && `/user-profile/${user}`;
     const handleSearchOpen = () => {
         setSearchOpen(!searchOpen)
     }
+
 
     return (
         <header className="header">
@@ -75,7 +76,17 @@ const Header = ({
                     className={isSidebarOpen ? "close" : "menu"}
                 />
             </button>
-            <button className="menu-btn">{user ? user.username : "Guest"}</button>
+            <div className="dropdown">
+                <Link to={profileUrl}>
+                    <button
+                        className="btn btn-sm bg-transparent btn-rounded"
+                        type="button"
+                        id="profileBtn"
+                    >
+                        {user && user}
+                    </button>
+                </Link>
+            </div>
         </header>
     );
 };

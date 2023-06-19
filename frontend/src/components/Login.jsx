@@ -1,83 +1,38 @@
 import React, { useState } from "react";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {useAuthContext} from "../assets/js/AuthContext.jsx";
 
 const Login = () => {
-    const navigate = useNavigate();
-
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [user, setUser] = useState({username: '', password: ''});
+    const { login } = useAuthContext();
     const [error, setError] = useState(false);
 
-    // const [showPasswordResetForm, setShowPasswordResetForm] = useState(false);
-    // const [resetToken, setResetToken] = useState("");
-    // const [newPassword, setNewPassword] = useState("");
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios
-            .post("http://localhost:8080/api/v1/auth/authenticate", {
-                username: username,
-                password: password
-            })
-            .then((response) => {
-                console.log(response.data);
-                localStorage.setItem("accessToken", response.data.token);
-                localStorage.setItem("expirationTime", (new Date().getTime() + 24 * 60 * 60 * 1000).toString());
-                navigate("/movies")
-            })
-            .catch((error) => {
+    const handleSubmit = async (e) => {
+        const {username, password} = user;
+        if (username && password) {
+            console.log(user);
+            try {
+                await login(username, password);
+            } catch (err) {
                 setError(true);
-                console.error(error);
-            });
+                console.error("Erorare" + err);
+            }
+        }
     };
 
-    // const handlePasswordResetRequest = (e) => {
-    //     e.preventDefault();
-    //     // Send password reset request to the server
-    //     axios
-    //         .post("http://localhost:8080/users/forgot-password", { email: user.email })
-    //         .then((response) => {
-    //             console.log(response.data);
-    //             alert("Password reset email sent. Check your inbox.");
-    //         })
-    //         .catch((error) => {
-    //             console.error(error);
-    //             alert("Password reset request failed. Please try again.");
-    //         });
-    // };
+    const onUsernameChange = (e) => {
+        setUser((prevState) => ({
+            ...prevState,
+            username: e.target.value,
+        }));
+    };
 
-    // const handlePasswordReset = (e) => {
-    //     e.preventDefault();
-    //     axios
-    //         .post("http://localhost:8080/users/reset-password", {
-    //             resetToken,
-    //             newPassword,
-    //         })
-    //         .then((response) => {
-    //             console.log(response.data);
-    //             alert("Password reset successful!");
-    //             setShowPasswordResetForm(false); // Reset back to login form
-    //         })
-    //         .catch((error) => {
-    //             console.error(error);
-    //             alert("Password reset failed. Please try again.");
-    //         });
-    // };
-
-//   const handlePasswordReset = (e) => {
-//       e.preventDefault();
-//       // Send password reset request to the backend API
-//       axios
-//         .post("http://localhost:8080/users/reset-password", { email: user.email })
-//         .then((response) => {
-//           console.log(response.data);
-//           alert("Password reset email sent.");
-//         })
-//         .catch((error) => {
-//           console.error(error);
-//         });
-//     };
+    const onPasswordChange = (e) => {
+        setUser((prevState) => ({
+            ...prevState,
+            password: e.target.value,
+        }));
+    };
 
     return (
         <section className="register vh-100" style={{background: "radial-gradient(circle, hsl(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0.5) 100%)"}}>
@@ -93,14 +48,6 @@ const Login = () => {
                                             className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4"
                                             style={{color: "yellowgreen"}}
                                         >Log In</p>
-                                        <p
-                                            className="fs-4"
-                                            style={{
-                                                color: "red",
-                                                textAlign: "center",
-                                                display: error ? "block" : "none"
-                                        }}
-                                        >Username or password incorrect!</p>
 
                                         <form className="mx-1 mx-md-4">
 
@@ -115,12 +62,11 @@ const Login = () => {
                                                            style={{
                                                                color: "dodgerblue"
                                                            }}
-                                                           value={username}
-                                                           onChange={(e) => setUsername(e.target.value)}
+                                                           value={user.username}
+                                                           onChange={onUsernameChange}
                                                     />
                                                     {
-                                                        !username && <label
-                                                            htmlFor="form3Example3c"
+                                                        !user.username && <label
                                                             className="form-label fw-bold"
                                                             style={{
                                                                 color: "white",
@@ -150,12 +96,11 @@ const Login = () => {
                                                         style={{
                                                             color: "dodgerblue"
                                                         }}
-                                                        value={password}
-                                                        onChange={(e) => setPassword(e.target.value)}
+                                                        value={user.password}
+                                                        onChange={onPasswordChange}
                                                     />
                                                     {
-                                                        !password && <label
-                                                            htmlFor="form3Example3c"
+                                                        !user.password && <label
                                                             className="form-label fw-bold"
                                                             style={{
                                                                 color: "white",
@@ -183,7 +128,14 @@ const Login = () => {
                                                     Log In
                                                 </button>
                                             </div>
-
+                                            <p
+                                                className="fs-4 badge badge-danger rounded-pill"
+                                                style={{
+                                                    color: "red",
+                                                    textAlign: "center",
+                                                    display: error ? "block" : "none"
+                                                }}
+                                            >Username or password incorrect!</p>
                                         </form>
 
                                     </div>
@@ -191,7 +143,7 @@ const Login = () => {
                                         className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
                                         <img
-                                            src="../../public/wallpaper2.jpg"
+                                            src="/wallpaper2.jpg"
                                             className="img-fluid" alt="Sample image" />
                                     </div>
                                 </div>
