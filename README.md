@@ -16,7 +16,7 @@ Cinema Central Application is a Spring Boot and React application that provides 
 
 - **Responsiveness:** Fully responsive frontend using different designs on different screens and media queries.
 
-## Technologies Used
+## Technologies Used.
 
 - **Java**
 - **Spring Boot**

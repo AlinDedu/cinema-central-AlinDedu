@@ -10,6 +10,7 @@ import MovieLanguageGridList from "../components/MovieLanguageGridList.jsx";
 const LanguagePage = ({
       handleSearchInputChange,
       searchQuery,
+    itemsCount,
       handleSearchModalClose,
       searching,
       toggleSidebar,
@@ -37,6 +38,7 @@ const LanguagePage = ({
             <Header
                 toggleSidebar={toggleSidebar}
                 isSidebarOpen={isSidebarOpen}
+                itemsCount={itemsCount}
                 handleSearchInputChange={handleSearchInputChange}
                 searching={searching}
             />

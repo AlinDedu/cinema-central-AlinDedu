@@ -117,6 +117,16 @@ const Login = () => {
                                                     }
                                                 </div>
                                             </div>
+                                            <span>
+                                                <strong>
+                                                <p
+                                                    style={{
+                                                        color: "teal",
+                                                        fontSize: "15px",
+                                                        textAlign: "center",
+                                                    }}
+                                                >Don't have an account yet? <a href="/register" style={{display: "inline", fontSize: "16px", textDecoration: "underline"}}>Register!</a></p></strong>
+                                            </span>
 
 
                                             <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

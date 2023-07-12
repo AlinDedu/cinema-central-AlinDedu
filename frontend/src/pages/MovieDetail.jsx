@@ -17,11 +17,19 @@ const MovieDetail = ({
      searchQuery,
      handleSearchModalClose,
      searching,
-     setSearching
+     setSearching,
+    itemsCount,
+    setItemsCount
 }) => {
     const [movie, setMovie] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
     const { id } = useParams();
+    const username = localStorage.getItem("user");
+    const token = JSON.parse(localStorage.getItem("token")).token;
+    const headers = {
+        Authorization: `Bearer ${token}`
+    }
+    const pricePerPiece = movie.vote_average ? (movie.vote_average.toFixed(1) * 6).toFixed(0) : 10
 
     useEffect(() => {
         fetchDataFromServer(`https://api.themoviedb.org/3/movie/${id}?api_key=${api_key}&append_to_response=casts,videos,images,releases`, function (movie) {
@@ -62,21 +70,16 @@ const MovieDetail = ({
     }
 
     const addToFavorites = () => {
-        const username = localStorage.getItem("user");
-        const movieName = movie.title;
-        const token = JSON.parse(localStorage.getItem("token")).token;
-
-        const headers = {
-            Authorization: `Bearer ${token}`
-        }
-        console.log(username)
+        const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 0
 
         axios
-            .post('http://localhost:8080/api/v1/user/favorite-movies', null, {
-                params: {
-                    username: username,
-                    movie: movieName
-                },
+            .post('http://localhost:8080/api/v1/favorites', {
+                username: username,
+                movieTitle: movie.title,
+                imdbId: movie.imdb_id,
+                rating: movie.vote_average ? movie.vote_average.toFixed(1).toString() : "NA",
+                production: movie.production_companies[0].name
+            }, {
                 headers: headers
             })
             .then(response => {
@@ -85,7 +88,28 @@ const MovieDetail = ({
             .catch(error => {
                 console.log(error);
             });
+    }
 
+    const addToCart = () => {
+        console.log(movie.imdb_id)
+        axios
+            .post('http://localhost:8080/api/v1/cart-items', {
+                username: username,
+                movieTitle: movie.title,
+                imdbId: movie.imdb_id,
+                production: movie.production_companies[0].name,
+                quantity: 1,
+                pricePerPiece: pricePerPiece
+            }, {
+                headers: headers
+            })
+            .then(response => {
+                setItemsCount(itemsCount + 1)
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     document.title = `${movie.title} - Cinema Central`;
@@ -96,6 +120,7 @@ const MovieDetail = ({
             <Header
                 toggleSidebar={toggleSidebar}
                 isSidebarOpen={isSidebarOpen}
+                itemsCount={itemsCount}
                 handleSearchInputChange={handleSearchInputChange}
                 searching={searching}
             />
@@ -120,6 +145,12 @@ const MovieDetail = ({
                                     onClick={addToFavorites}
                                 >
                                     <i className="fas fa-heart mr-1"></i>Add To Favorite
+                                </button>
+                                <button
+                                    className="btn btn-outline-success rounded-pill ml-auto mb-3"
+                                    onClick={addToCart}
+                                >
+                                    <i className="fa-brands fa-cc-paypal mr-1"></i>Add To Cart <span style={{ marginLeft: '5px' }}>${pricePerPiece}</span>
                                 </button>
                                 <div className="meta-list">
                                     <div className="meta-item">

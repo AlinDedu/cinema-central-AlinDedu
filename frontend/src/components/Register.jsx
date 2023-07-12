@@ -26,12 +26,14 @@ const Register = () => {
 
         try {
             const response = await axios.get(`http://localhost:8080/api/v1/auth/check-username?username=${inputUsername}`);
-            const {available} = response.data;
-            setUsernameAvailable(available);
+            console.log(response.data.available)
+            setUsernameAvailable(response.data.available);
         } catch (error) {
             console.error(error);
         }
+        console.log("Username Available: " + usernameAvailable)
     };
+
 
     const handleEmailChange = (e) => {
         const inputEmail = e.target.value;
@@ -61,10 +63,16 @@ const Register = () => {
     }, [password, repeatPassword]);
 
     useEffect(() => {
-        if (emailIsValid && passLengthValid && passHasCapital && passHasDigit && passRepeatMatch && usernameAvailable) {
-            setAllChecks(true);
-        }
-    }, [emailIsValid, passLengthValid, passHasCapital, passHasDigit, passRepeatMatch, usernameAvailable])
+        console.log(usernameAvailable)
+        const timer = setTimeout(() => {
+            const checks = [emailIsValid, passLengthValid, passHasCapital, passHasDigit, passRepeatMatch, usernameAvailable];
+            const areAllChecksValid = checks.every((check) => check);
+            setAllChecks(areAllChecksValid);
+        }, 100); // Delay in milliseconds
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [emailIsValid, passLengthValid, passHasCapital, passHasDigit, passRepeatMatch, usernameAvailable]);
 
 
     const handleSubmit = async (e) => {
@@ -247,6 +255,17 @@ const Register = () => {
                                                 </div>
                                                 <span className={`badge rounded-pill ${passRepeatMatch ? 'badge-success' : 'badge-danger'}`}>Passwords Match</span>
                                             </div>
+
+                                            <span>
+                                                <strong>
+                                                <p
+                                                    style={{
+                                                        color: "teal",
+                                                        fontSize: "15px",
+                                                        textAlign: "center"
+                                                    }}
+                                                >Already have an account?  <a href="/login" style={{display: "inline", fontSize: "16px", textDecoration: "underline"}}>Log In!</a></p></strong>
+                                            </span>
 
                                             <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                                 <button

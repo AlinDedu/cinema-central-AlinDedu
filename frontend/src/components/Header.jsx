@@ -1,16 +1,19 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useAuthContext} from "../assets/js/AuthContext.jsx";
+import axios from "axios";
 
 const Header = ({
     toggleSidebar,
     isSidebarOpen,
+    itemsCount,
     handleSearchInputChange,
-    searching
+    searching,
 }) => {
 
     const [searchOpen, setSearchOpen] = useState(false);
     const {user} = useAuthContext();
+    const token = JSON.parse(localStorage.getItem("token")).token;
     const profileUrl = user && `/user-profile/${user}`;
     const handleSearchOpen = () => {
         setSearchOpen(!searchOpen)
@@ -76,6 +79,15 @@ const Header = ({
                     className={isSidebarOpen ? "close" : "menu"}
                 />
             </button>
+            <a href="/cart">
+                <i className="fas fa-shopping-cart fa-lg"></i>
+                <span
+                    className="badge rounded-pill badge-notification bg-danger"
+                    style={{
+                        fontSize: "10px"
+                    }}
+                >{itemsCount}</span>
+            </a>
             <div className="dropdown">
                 <Link to={profileUrl}>
                     <button

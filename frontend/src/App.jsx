@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import axios from "axios";
 import MainPage from './pages/MainPage.jsx';
 import MovieDetail from "./pages/MovieDetail.jsx";
 import Landing from "./pages/Landing.jsx";
@@ -11,14 +12,17 @@ import LanguagePage from "./pages/LanguagePage.jsx";
 import removeTokenIfExpired from "./assets/js/token.js";
 import {AuthContextProvider} from "./assets/js/AuthContext.jsx";
 import ProfilePage from "./components/UserProfilePage.jsx";
+import Cart from "./pages/Cart.jsx"
 
 function App() {
     removeTokenIfExpired();
 
+    const user = localStorage.getItem("user");
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [searching, setSearching] = useState(false);
-    const token = localStorage.getItem("accessToken");
+    const [itemsCount, setItemsCount] = useState(0)
+    const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).token : null;
 
     const toggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
@@ -33,19 +37,22 @@ function App() {
        setSearchQuery('');
    }
 
-    // useEffect(async () => {
-    //     if (token != null) {
-    //         await axios.get("http://localhost:8080/api/v1/user/details", {
-    //                 headers: {Authorization: `Bearer ${token}`}
-    //             }
-    //         )
-    //             .then((response) => {
-    //                 console.log(response.data)
-    //                 setUserDetails(response.data)
-    //             })
-    //     }
-    // }, []);
-
+    useEffect(() => {
+        if (token != null) {
+            axios.get(`http://localhost:8080/api/v1/cart-items?username=${user}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+                .then(response => {
+                    console.log(response.data)
+                    setItemsCount(response.data.length)
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    }, []);
 
     return (
         <AuthContextProvider>
@@ -66,6 +73,7 @@ function App() {
                                 <MainPage
                                     toggleSidebar={toggleSidebar}
                                     isSidebarOpen={isSidebarOpen}
+                                    itemsCount={itemsCount}
                                     handleSearchInputChange={handleSearchInputChange}
                                     searchQuery={searchQuery}
                                     handleSearchModalClose={handleSearchModalClose}
@@ -80,6 +88,8 @@ function App() {
                                 <MovieDetail
                                     toggleSidebar={toggleSidebar}
                                     isSidebarOpen={isSidebarOpen}
+                                    itemsCount={itemsCount}
+                                    setItemsCount={setItemsCount}
                                     handleSearchInputChange={handleSearchInputChange}
                                     searchQuery={searchQuery}
                                     handleSearchModalClose={handleSearchModalClose}
@@ -94,6 +104,7 @@ function App() {
                                 <CategoryPage
                                     toggleSidebar={toggleSidebar}
                                     isSidebarOpen={isSidebarOpen}
+                                    itemsCount={itemsCount}
                                     handleSearchInputChange={handleSearchInputChange}
                                     searchQuery={searchQuery}
                                     handleSearchModalClose={handleSearchModalClose}
@@ -108,6 +119,7 @@ function App() {
                                 <LanguagePage
                                     toggleSidebar={toggleSidebar}
                                     isSidebarOpen={isSidebarOpen}
+                                    itemsCount={itemsCount}
                                     handleSearchInputChange={handleSearchInputChange}
                                     searchQuery={searchQuery}
                                     handleSearchModalClose={handleSearchModalClose}
@@ -120,6 +132,7 @@ function App() {
                             path="user-profile/:username"
                             element={<ProfilePage />}
                         />
+                        <Route path="/cart" element = {<Cart />}/>
                         <Route path="*" element={<Navigate to={"/movies"}/>}/>
                     </Route>
                 </Routes>

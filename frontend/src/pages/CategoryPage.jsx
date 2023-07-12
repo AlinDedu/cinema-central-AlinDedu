@@ -2,7 +2,7 @@ import Header from "../components/Header.jsx";
 import Sidebar from "../components/Sidebar.jsx";
 import Overlay from "../components/Overlay.jsx";
 import SearchModal from "../components/SearchModal.jsx";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState} from 'react';
 import {api_key, fetchDataFromServer} from "../assets/js/api.js";
 import MovieCategoryGridList from "../components/MovieCategoryGridList.jsx";
 
@@ -11,6 +11,7 @@ const CategoryPage = ({
       setSearching,
       toggleSidebar,
       isSidebarOpen,
+      itemsCount,
       handleSearchInputChange,
       searchQuery,
       handleSearchModalClose
@@ -36,6 +37,7 @@ const CategoryPage = ({
             <Header
                 toggleSidebar={toggleSidebar}
                 isSidebarOpen={isSidebarOpen}
+                itemsCount={itemsCount}
                 handleSearchInputChange={handleSearchInputChange}
                 searching={searching}
             />

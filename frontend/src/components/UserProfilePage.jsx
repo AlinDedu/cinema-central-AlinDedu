@@ -7,7 +7,6 @@ import { useAuthContext } from "../assets/js/AuthContext.jsx";
 const UserProfilePage = () => {
     const { user, logout } = useAuthContext();
     const token = JSON.parse(localStorage.getItem("token")).token
-    console.log(token)
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [favoriteMovies, setFavoriteMovies] = useState([]);
@@ -28,20 +27,19 @@ const UserProfilePage = () => {
                         Authorization: `Bearer ${token}`
                     }
                 })
-                const { username, email, favoriteMovies } = response.data;
+                const { username, email} = response.data;
                 setUsername(username);
                 setEmail(email);
             } catch (error) {
                 console.log(error);
             }
             console.log(user)
-            await axios.get(`http://localhost:8080/api/v1/user/favorite-movies?username=${user}`, {
+            await axios.get(`http://localhost:8080/api/v1/favorites?username=${user}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
                 .then(response => {
-                    console.log(response)
                     setFavoriteMovies(response.data);
                 })
                 .catch(error => {
@@ -51,23 +49,26 @@ const UserProfilePage = () => {
         fetchProfileData();
     }, []);
 
-    const handleDelete = (movie) => {
-        axios.delete(`http://localhost:8080/api/v1/user/favorite-movies?username=${user}&movie=${movie}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then(response => {
-                console.log('Movie deleted successfully');
-                // Perform any necessary actions after successful deletion
+    // ...
+
+    const handleDelete = (movieId) => {
+        axios
+            .delete(`http://localhost:8080/api/v1/favorites/${movieId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then(() => {
+                // Remove the deleted movie from favoriteMovies
+                setFavoriteMovies(prevFavoriteMovies =>
+                    prevFavoriteMovies.filter(movie => movie.id !== movieId)
+                );
             })
             .catch(error => {
-                console.error('Error deleting movie:', error);
-                // Handle any errors that occurred during deletion
+                console.log(error);
             });
     }
-
-
+    
     return (
         <div>
             <p
@@ -99,10 +100,10 @@ const UserProfilePage = () => {
                         {favoriteMovies.map((movie, index) => (
                             <MDBListGroupItem
                                 key={index}>
-                                {movie.movieName}
+                                {movie.movieTitle}
                                 <button
                                     className=' badge badge-danger float-end'
-                                    onClick={() => handleDelete(movie.movieName)}
+                                    onClick={() => handleDelete(movie.id)}
                                 >Remove</button>
                             </MDBListGroupItem>
                         ))}

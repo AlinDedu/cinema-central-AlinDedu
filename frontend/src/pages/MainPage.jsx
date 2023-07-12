@@ -14,6 +14,7 @@ const MainPage = ({
       handleSearchModalClose,
       searching,
       setSearching,
+    itemsCount
 }) => {
 
     return (
@@ -21,6 +22,7 @@ const MainPage = ({
                 <Header
                     toggleSidebar={toggleSidebar}
                     isSidebarOpen={isSidebarOpen}
+                    itemsCount={itemsCount}
                     handleSearchInputChange={handleSearchInputChange}
                     searching={searching}
                 />
